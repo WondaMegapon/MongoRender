@@ -35,13 +35,13 @@ console.log("Looking for: " + searchKey);
 
 async function run() {
   try {
-    const database = client.db('wndb');
-    const parts = database.collection('collection');
+    const database = client.db('sample_guides');
+    const parts = database.collection('planets');
 
     // Hardwired Query for a part that has partID '12345'
     // const query = { partID: '12345' };
     // But we will use the parameter provided with the route
-    const query = { partID: req.params.item };
+    const query = { name: req.params.item };
 
     const part = await parts.findOne(query);
     console.log(part);
