@@ -18,12 +18,12 @@ app.use(express.urlencoded({ extended: true }));
 // Default route:
 app.get('/', function(req, res) {
   const myquery = req.query;
-  var outstring = 'Starting... ';
+  var outstring = 'Webpage started! We exist.';
   res.send(outstring);
 });
 
 app.get('/say/:name', function(req, res) {
-  res.send('Hello ' + req.params.name + '!');
+  res.send('Hello ' + req.params.name + '.');
 });
 
 
@@ -35,20 +35,16 @@ app.get('/api/mongo/:item', function(req, res) {
 
   async function run() {
     try {
-      const database = client.db('sample_guides');
-      const parts = database.collection('planets');
+      const database = client.db('Wondabase');
+      const parts = database.collection('Utilities');
 
-      // Hardwired Query for a part that has partID '12345'
-      // const query = { partID: '12345' };
-      // But we will use the parameter provided with the route
       const query = { name: req.params.item };
 
       const part = await parts.findOne(query);
       console.log(part);
-      res.send('Found this: ' + JSON.stringify(part));  //Use stringify to print a json
+      res.send('Found this: ' + JSON.stringify(part));
 
     } finally {
-      // Ensures that the client will close when you finish/error
       await client.close();
     }
   }
